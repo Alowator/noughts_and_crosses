@@ -1,58 +1,38 @@
 asect  0x00
 
-ldi r0, byte0
-ld r0, r0
-
-ldi r3, 0
-ldi r1, 0b11000000
-while 
-	ldi r2, 9
-	cmp r2, r3
-stays nz
+ldi r3, 9
+do	
+	dec r3
+	
+	ldi r0, b0
+	add r3, r0
+	ld r0, r0
 	
 	if 
-		ldi r2, 4
-		cmp r2, r3
+		tst r0
 	is z
 	then
-		ldi r0, byte1
-		ld r0, r0
-		ldi r1, 0b11000000
-	fi
-	if 
-		ldi r2, 8
-		cmp r2, r3
-	is z
-	then
-		ldi r0, byte2
-		ld r0, r0
-		ldi r1, 0b11000000
-	fi
-
-	move r1, r2
-	and r0, r2
-	
-	if 
-		tst r2
-	is z 
-	then 
-		ldi r2, res
-		st r2, r3 
-		halt		
+		ldi r0, res
+		st r0, r3
+		halt
 	fi	
 
-	shr r1
-	shr r1
-	inc r3
-wend
+	tst r3
+until z
 
 halt
 
-asect  0xf0
+asect  0xe0
 inputs>
-	byte0:		ds 1
-	byte1:		ds 1
-	byte2:		ds 1
+	b0:		ds 1
+	b1:		ds 1
+	b2:		ds 1
+	b3:		ds 1
+	b4:		ds 1
+	b5:		ds 1
+	b6:		ds 1
+	b7:		ds 1
+	b8:		ds 1
 outputs>
-	res:		ds 1
+	res:	ds 1
 end
